@@ -1,0 +1,11 @@
+class students {
+    constructor(id, firstname, lastname, gender, id_house) {
+        this.id = id
+        this.firstname = firstname
+        this.lastname = lastname
+        this.gender = gender
+        this.id_house = id_house
+    }
+}
+
+export default students
