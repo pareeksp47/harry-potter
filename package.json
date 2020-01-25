@@ -2,10 +2,9 @@
 	"name": "harry-potter",
 	"version": "1.0.0",
 	"scripts": {
-		
-		 "server" : "nodemon --exec babel-node server.js",
-		 "client": "cd client && npm start",
-		 "start" : "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+		"server": "nodemon --exec babel-node server.js",
+		"client": "cd client && npm start",
+		"start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
@@ -18,7 +17,6 @@
 		"@babel/preset-env": "^7.8.3"
 	},
 	"devDependencies": {
-		
 		"concurrently": "^4.0.1",
 		"jest": "^24.9.0",
 		"nodemon": "^1.19.4"
