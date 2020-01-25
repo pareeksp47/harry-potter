@@ -2,103 +2,68 @@ import React, { Component } from 'react';
 import { red } from '@material-ui/core/colors';
 import gryffindor from '../gryffindor.png';
 import './Header.css';
-import { Typography, Grid, Card, CardMedia, CardContent, CardActions } from '@material-ui/core';
-// const styles = theme => ({
-//     root: {
-//       flexGrow: 3,
-//     },
-//     form_root: {
-//       '& > *': {
-//         margin: theme.spacing(1),
-//       },
-//     },
-//     menuButton: {
-//       marginRight: theme.spacing(2),
-//     },
-//     title: {
-//         color: red,
-//       flexGrow: 1,
-//     },
-//     paper: {
-//       height: 280,
-//       width: 500,
-//     },
-//     control: {
-//       padding: theme.spacing(2),
-//     },
-//     hufflepuff: {
-//       //backgroundImage: `url(${logo})`,
-//       height: 280,
-//       backgroundPosition: 'center',
-//       filter: 9,
-//       backgroundSize: 'cover',
-//       backgroundRepeat: 'no-repeat'
-//     },
-//     card: {
-//       maxWidth: 500,
-//     },
-//     media: {
-//       height: 150,
-//       margin: 50,
-//       padding: 10,
-//       paddingTop: '50.25%', // 16:9
-//     },
-//     expand: {
-//       transform: 'rotate(0deg)',
-//       marginLeft: 'auto',
-//       transition: theme.transitions.create('transform', {
-//         duration: theme.transitions.duration.shortest,
-//       }),
-//     },
-//     expandOpen: {
-//       transform: 'rotate(180deg)',
-//     },
-//     avatar: {
-//       backgroundColor: red[500],
-//     },
-//     tableRoot: {
-//       width: '100%',
-//     },
-//     tableContainer: {
-//       maxHeight: 440,
-//     },
-//     modal_paper: {
-//       position: 'absolute',
-//       width: 400,
-//       backgroundColor: theme.palette.background.paper,
-//       border: '2px solid #000',
-//       boxShadow: theme.shadows[5],
-//       padding: theme.spacing(2, 4, 3),
-//     },
-//   });
-
-// //   const classes = useStyles()
-
+import {
+    Typography, Grid, Card, CardMedia, CardContent, CardActions, Fab, Dialog, DialogTitle,
+    DialogContent, DialogContentText, DialogActions, FormControl, InputLabel,
+    FormLabel, RadioGroup, FormControlLabel, Radio, Input, Button, TextField, MenuItem
+} from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 
 class Gryffindor extends Component {
-      constructor() {
+    constructor() {
         super();
-      }
+        this.state = {
+            houseName: '',
+            lastName: '',
+            open: false,
+            professor: 'Select your professor'
+        }
+        this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
+        this.handleChangeLastName = this.handleChangeLastName.bind(this);
+        this.handleClickOpen = this.handleClickOpen.bind(this);
+        this.handleClickClose = this.handleClickClose.bind(this);
+        this.handleProfessors = this.handleProfessors.bind(this);
+        this.professors = [
+            {
+                value: 'John',
+                label: 'Johnn Florian'
+            },
+            {
+                value: 'ALex',
+                label: 'Alexxxx'
+            },
+            {
+                value: 'Eric',
+                label: 'Eric'
+            }
+        ];
+    }
 
-    //   state = {
-    //     renderedResponse: ''
-    //   }
+    handleChangeLastName(event) {
+        this.setState({
+            lastName: event.target.value
+        });
+    }
 
-    //   getResponse = async() => {
-    //     const response = await fetch('/api/getStudents');
-    //     const body = await response.json();
-    // 	console.log("body");
-    //     if (response.status !== 200) throw Error(body.message);
-    //     return body;
-    //   }
+    handleChangeFirstName(event) {
+        this.setState({
+            firstName: event.target.value
+        });
+    }
 
-    //   componentDidMount() {
-    //     this.getResponse()
-    //       .then(res => {
-    //         const someData = res.students[0].firstname;
-    //         this.setState({ renderedResponse: someData });
-    //       })
-    //   }
+    handleProfessors(event) {
+        this.setState({
+            professor: event.target.value
+        });
+    }
+
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClickClose = () => {
+        this.setState({ open: false });
+    };
 
     render() {
         let bgImgGryffindor = {
@@ -109,8 +74,7 @@ class Gryffindor extends Component {
             width: '100%',
             height: '100%',
             backgroundColor: 'red',
-      
-          }
+        }
         return (
             <>
                 <Grid item xs={6}>
@@ -123,54 +87,40 @@ class Gryffindor extends Component {
                             <Grid item xs>
                                 <Typography gutterBottom variant="h4"> Toothbrush </Typography>
                                 <Typography gutterBottom variant="h6"> 23 </Typography>
+
                             </Grid>
-                            {/* <IconButton className={clsx(classes.expand, { [classes.expandOpen]: expanded })}
-                                onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more" >
-                                <ExpandMoreIcon />
-                            </IconButton> */}
+                            <Fab color="inherit" style={{ marginRight: '10px' }} aria-label="edit" onClick={this.handleClickOpen}>
+                                <EditIcon fontSize="large" />
+                            </Fab>
                         </CardActions>
-                        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-                            <CardContent>
-                                <Paper className={classes.tableRoot}>
-                                    <TableContainer className={classes.tableContainer}>
-                                        <Table stickyHeader aria-label="sticky table">
-                                            <TableHead>
-                                                <TableRow>
-                                                    {columns.map(column => (
-                                                        <TableCell
-                                                            key={column.id}
-                                                            align={column.align}
-                                                            style={{ minWidth: column.minWidth }}>
-                                                            {column.label}
-                                                        </TableCell>
-                                                    ))}
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
-                                                    return (
-                                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                                            {columns.map(column => {
-                                                                const value = row[column.id];
-                                                                return (
-                                                                    <TableCell key={column.id} align={column.align}>
-                                                                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                                    </TableCell>
-                                                                );
-                                                            })}
-                                                        </TableRow>
-                                                    );
-                                                })}
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>
-                                    <TablePagination
-                                        rowsPerPageOptions={[5, 10, 20]} component="div" count={rows.length}
-                                        rowsPerPage={rowsPerPage} page={page} onChangePage={handleChangePage} onChangeRowsPerPage={handleChangeRowsPerPage}
-                                    />
-                                </Paper>
-                            </CardContent>
-                        </Collapse> */}
+                        <Dialog open={this.state.open} onClose={this.handleClickClose} aria-labelledby="form-dialog-title">
+                            <DialogTitle id="form-dialog-title">Add / Remove Points</DialogTitle>
+                            <DialogContent>
+                            <FormControl className="marginInputField" fullWidth> 
+                                    <InputLabel htmlFor="component-simple">Points</InputLabel>
+                                    <Input id="lastname" type="number" value={this.state.lastName} onChange={this.handleChangeLastName} />
+                                </FormControl>
+                                <TextField
+                                    id="standard-select-currency"
+                                    select
+                                    label="Select"
+                                    fullWidth
+                                    value={this.state.professor}
+                                    onChange={this.handleProfessors}
+                                >
+                                    {this.professors.map(option => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                                
+                            </DialogContent>
+                            <DialogActions>
+                                <Button color="primary" onClick={this.handleClickClose}>
+                                    Update Points</Button>
+                            </DialogActions>
+                        </Dialog>
                     </Card>
                 </Grid>
             </>

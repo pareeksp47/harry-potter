@@ -13,7 +13,7 @@ class TypeOrmDal {
         port: 3306,
         username: 'root',
         password: 'root',
-        database: 'db_harrypotter',
+        database: 'harry_potter',
         entities: [studentSchema,professorSchema]
 		
       })
