@@ -1,3 +1,18 @@
 .cardMediaImg{
-    background-image: url('../gryffindor.png');
+    /* background-image: url('../gryffindor.png'); */
+    height: 150px;
+    width: 400px;
+    margin: 50px;
+    padding: 10px;
+    padding-top: 50.25%;
+}
+.card{
+    max-width: 400px,
+}
+.marginInputField{
+    margin-bottom: 15px !important;
+
+}
+.addStudentBtn{
+    margin-left: 60% !important;
 }

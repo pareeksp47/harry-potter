@@ -76,10 +76,9 @@ import { Typography, Grid, Card, CardMedia, CardContent, CardActions } from '@ma
 
 
 class Gryffindor extends Component {
-    // const classes = useStyles()
-    //   constructor() {
-    //     super();
-    //   }
+      constructor() {
+        super();
+      }
 
     //   state = {
     //     renderedResponse: ''
@@ -115,8 +114,8 @@ class Gryffindor extends Component {
         return (
             <>
                 <Grid item xs={6}>
-                    <Card>
-                        <CardMedia title="Gryffindor" className="cardMediaImg" />
+                    <Card className="card">
+                        <CardMedia title="Gryffindor" className="cardMediaImg" image={gryffindor} />
                         <CardContent>
                             <Typography variant="h2" color="textSecondary" component="h1"> Gryffindor </Typography>
                         </CardContent>

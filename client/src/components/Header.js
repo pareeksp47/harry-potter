@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import { red } from '@material-ui/core/colors';
 
-// import './Header.css';
+import './Header.css';
 import {
     makeStyles, AppBar, Toolbar, IconButton, Button, Typography, Dialog, DialogTitle,
     DialogContent, DialogContentText, DialogActions, FormControl, InputLabel,
@@ -81,13 +81,56 @@ import {
 
 class Header extends Component {
     // const classes = useStyles()
-    //   constructor() {
-    //     super();
-    //   }
+    constructor() {
+        super();
+        this.state = {
+            firstName: '',
+            lastName: '',
+            gender: 'male',
+            open: false
+        }
+        this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
+        this.handleChangeLastName = this.handleChangeLastName.bind(this);
+        this.handleChangeRadio = this.handleChangeRadio.bind(this);
+        this.handleClickOpen = this.handleClickOpen.bind(this);
+        this.handleClickClose = this.handleClickClose.bind(this);
 
-      state = {
-        gryffindor: ''
-      }
+    }
+
+    handleChangeLastName(event) {
+        this.setState({
+            lastName: event.target.value
+        });
+        console.log("lastname", this.state.lastName);
+    }
+
+    handleChangeFirstName(event) {
+        this.setState({
+            firstName: event.target.value
+        });
+        console.log("firstname", this.state.firstName);
+    }
+
+    handleClickOpen = () => {
+        this.setState({ open: true });
+        console.log("open");
+    };
+
+    handleClickClose = () => {
+        this.setState({ open: false });
+    };
+
+
+    handleChangeRadio(event) {
+        this.setState({
+            gender: event.target.value
+        });
+    };
+
+   
+    // handleChangeRadio = event => {
+    //     setValue(event.target.value);
+    // };
 
     //   getResponse = async() => {
     //     const response = await fetch('/api/getStudents');
@@ -114,34 +157,33 @@ class Header extends Component {
                         <Typography variant="h4">
                             Hogwarts
                         </Typography>
-                        <Button color="inherit" >Add Student/Professor</Button>
+                        <Button color="inherit" className="addStudentBtn" onClick={this.handleClickOpen} >Add Student /Professor</Button>
                     </Toolbar>
                 </AppBar>
-                {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title"> Create Student</DialogTitle>
-            <DialogContent>
-            
-                <FormControl fullWidth>
-                    <InputLabel htmlFor="component-simple">First Name</InputLabel>
-                    <Input id="firstname" value={firstName} onChange={handleChangeFirstName} />
-                </FormControl>
-                <FormControl fullWidth>
-                    <InputLabel htmlFor="component-simple">Last Name</InputLabel>
-                    <Input id="lastname" value={lastName} onChange={handleChangeLastName} />
-                </FormControl>
-                <FormControl component="fieldset">
-                    <FormLabel component="legend">Gender</FormLabel>
-                    <RadioGroup aria-label="gender" name="gender2" value={value} onChange={handleChangeRadio}>
-                        <FormControlLabel value="female" control={<Radio color="primary" />} label="Female" labelPlacement="start" />
-                        <FormControlLabel value="male" control={<Radio color="primary" />} label="Male" labelPlacement="start" />
-                    </RadioGroup>
-                </FormControl>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                    Create Student</Button>
-            </DialogActions>
-        </Dialog> */}
+                <Dialog open={this.state.open} onClose={this.handleClickClose}  aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title"> Create Student</DialogTitle>
+                    <DialogContent>
+                        <FormControl fullWidth className="marginInputField">
+                            <InputLabel htmlFor="component-simple">First Name</InputLabel>
+                            <Input id="firstname" value={this.state.firstName} onChange={this.handleChangeFirstName} />
+                        </FormControl>
+                        <FormControl fullWidth className="marginInputField">
+                            <InputLabel htmlFor="component-simple">Last Name</InputLabel>
+                            <Input id="lastname" value={this.state.lastName} onChange={this.handleChangeLastName} />
+                        </FormControl>
+                        <FormControl component="fieldset" className="marginInputField">
+                            <FormLabel component="legend" className="marginInputField">Gender</FormLabel>
+                            <RadioGroup aria-label="gender" name="gender2" value={this.state.gender} onChange={this.handleChangeRadio}>
+                                <FormControlLabel value="female" control={<Radio color="primary" />} label="Female" labelPlacement="start" />
+                                <FormControlLabel value="male" control={<Radio color="primary" />} label="Male" labelPlacement="start" />
+                            </RadioGroup>
+                        </FormControl>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button color="primary" onClick={this.handleClickClose}>
+                            Create Student</Button>
+                    </DialogActions>
+                </Dialog>
             </>
         );
     }
