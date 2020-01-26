@@ -2,33 +2,60 @@ import React, { Component } from 'react';
 import '../App.css';
 import { Box, makeStyles, Container, Grid,Typography } from '@material-ui/core';
 import Header from './Header';
-import Gryffindor from './Gryffindor';
+import House from './House';
 
 
 class App extends Component {
   state = {
-    renderedResponse: ''
+    houses: '',
+	points: ''
   }
 
-  getResponse = async() => {
-    const response = await fetch('/api/getStudents');
+  getHouses = async() => {
+    const response = await fetch('/api/getHouses');
     const body = await response.json();
-	console.log("body");
-    if (response.status !== 200) throw Error(body.message);
+    if (response.status !== 200) return "";
 
     return body;
   }
+  
+  getPoints = async() => {
+    const response = await fetch('/api/getPoints');
+    const body = await response.json();
+    if (response.status !== 200) return "";
+
+    return body;
+  } 
 
   componentDidMount() {
-    this.getResponse()
+    this.getHouses()
       .then(res => {
-        const someData = res.students[0].firstname;
-        this.setState({ renderedResponse: someData });
+        const houses = res.houses;
+        this.setState({ houses: houses });
+      })
+	  
+	this.getPoints()
+      .then(res => {
+		  
+		  let calPoints = {};
+		  if(res.points){
+			  
+			  res.points.map((point, i) => {     
+           
+				if(point){
+					calPoints[point.id_house] = calPoints[point.id_house] ? (calPoints[point.id_house] + point.nb_points) : point.nb_points
+				}
+			  })
+		  }
+		  
+        const points = calPoints;
+        this.setState({ points: points });
       })
   }
 
   render() {
-    const { renderedResponse } = this.state;
+    const { houses } = this.state;
+	const { points } = this.state;
 
     return (
       <Container maxWidth='lg' >
@@ -37,11 +64,8 @@ class App extends Component {
       </Box>
       <Box m={3} p={2}>
         <Grid container spacing={4} p={2}>
-        <Gryffindor />
-          {/* 
-          <Hufflepuff />
-          <Ravenclaw />
-          <Slytherin /> */}
+		  {houses ? houses.map(item => <House key={item.id} name={item.name} points={points} id={item.id} />) : ""} 
+        
         </Grid>
       </Box>
     </Container>

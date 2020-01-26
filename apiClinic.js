@@ -1,6 +1,6 @@
 
 import students from './students'
-import professors from './professors'
+import points from './points'
 import TypeOrmDal from './typeOrmDal'
 
 
@@ -8,8 +8,88 @@ class ApiClinic {
     constructor() {
         this.students = []
         this.professors = []
+    }
+
+    async getAllStudents() {
+		
+		try{
+
+			const dal = new TypeOrmDal()
+			
+			
+			this.students = await dal.getAllStudents()
+
+			return {
+				students: this.students
+			}
+			
+		}catch(error) {
+				console.error(error);
+				return {}
+			
+		}
+    }
+	
+	async getAllHouses() {
+		
+		try{
+
+			const dal = new TypeOrmDal()
+			
+			
+			this.houses = await dal.getAllHouses()
+
+			return {
+				houses: this.houses
+			}
+			
+		}catch(error) {
+				console.error(error);
+				return {}
+			
+		}
+    }
+	
+	async getAllPoints() {
+		
+		try{
+
+			const dal = new TypeOrmDal()
+			
+			
+			this.points = await dal.getAllPoints()
+
+			return {
+				points: this.points
+			}
+			
+		}catch(error) {
+				console.error(error);
+				return {}
+			
+		}
+    }
+	
+	
+	async addRemovePoints(nb_points, id_professor, id_house){
+		
+		try{
+
+			const dal = new TypeOrmDal()
+			this.points = await dal.addRemovePoints(nb_points, id_professor, id_house)
+
+			return 200;
+			
+		}catch(error) {
+				console.error(error);
+				return {}
+			
+		}
+		
+		
+		
 	}
-	 
+	
 	async createStudent(firstname, lastname, gender,id_house) {
 		try{
 				const dal = new TypeOrmDal()
@@ -35,24 +115,7 @@ class ApiClinic {
 		
 		}
 	}
-
-    async getAllStudents() {
-		
-		try{
-
-			const dal = new TypeOrmDal()
-			this.students = await dal.getAllStudents()
-
-			return {
-				students: this.students
-			}
-			
-		}catch(error) {
-				console.error(error);
-				return {}
-			
-		}
-	}
+	
 	
 	async getAllProfessors() {
 		
@@ -73,7 +136,6 @@ class ApiClinic {
 			
 		}
 	}
-
 
 }
 

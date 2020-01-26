@@ -16,6 +16,42 @@ app.use(function (_req, res, next) {
     next()
 })
 
+app.get('/api/getStudents', async (req, res) => {
+
+    const createdElements = await getClinic().getAllStudents()
+    res.status(200).set({ 'Content-Type': 'application/json' }).json(createdElements)
+})
+
+
+app.get('/api/getHouses', async (req, res) => {
+
+    const createdElements = await getClinic().getAllHouses()
+    res.status(200).set({ 'Content-Type': 'application/json' }).json(createdElements)
+})
+
+app.get('/api/getPoints', async (req, res) => {
+
+    const createdElements = await getClinic().getAllPoints()
+    res.status(200).set({ 'Content-Type': 'application/json' }).json(createdElements)
+})
+
+
+app.post('/api/points/:nbpoints/:idprofessor/:idhouse', async (req, res) => {
+
+    const nbpoints = req.params.nbpoints;
+	const idprofessor = req.params.idprofessor;
+	const idhouse = req.params.idhouse;
+	
+	let statusCode = 400 ;
+	
+	if(nbpoints && idprofessor && idhouse){
+		
+		statusCode = await getClinic().addRemovePoints(nbpoints,idprofessor,idhouse);
+		
+	}
+	res.status(statusCode).send();
+})
+
 app.post('/api/createStudent/:firstname/:lastname/:gender/:id_house', async (req, res) => {
   
     const firstname = req.params.firstname
@@ -37,17 +73,13 @@ app.post('/api/createProfessor/:firstname/:lastname/:gender', async (req, res) =
     res.status(200).set({ 'Content-Type': 'application/json' }).json(createdElements)
 })
 
-app.get('/api/getStudents', async (req, res) => {
-
-    const createdElements = await getClinic().getAllStudents()
-    res.status(200).set({ 'Content-Type': 'application/json' }).json(createdElements)
-})
 
 app.get('/api/getProfessors', async (req, res) => {
 
     const createdElements = await getClinic().getAllProfessors()
     res.status(200).set({ 'Content-Type': 'application/json' }).json(createdElements)
 })
+
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
