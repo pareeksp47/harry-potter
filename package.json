@@ -2,7 +2,7 @@
 	"name": "harry-potter",
 	"version": "1.0.0",
 	"scripts": {
-		"server": "nodemon --exec babel-node server.js",
+		"server": "nodemon --exec babel-node index.js",
 		"client": "cd client && npm start",
 		"start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
 		"test": "jest --watchAll"
