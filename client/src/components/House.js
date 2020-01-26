@@ -26,6 +26,20 @@ class House extends Component {
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClickClose = this.handleClickClose.bind(this);
         this.handleProfessors = this.handleProfessors.bind(this);
+        this.professors = [
+            {
+                value: 'John',
+                label: 'Johnn Florian'
+            },
+            {
+                value: 'ALex',
+                label: 'Alexxxx'
+            },
+            {
+                value: 'Eric',
+                label: 'Eric'
+            }
+        ];
     }
 	
 	 handleChangePoints(event) {

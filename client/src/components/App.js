@@ -14,26 +14,26 @@ class App extends Component {
 
   getHouses = async() => {
     const response = await fetch('/api/getHouses');
-    const body = await response.json();
+    
     if (response.status !== 200) return "";
-
+	const body = await response.json();
     return body;
   }
   
   getPoints = async() => {
     const response = await fetch('/api/getPoints');
-    const body = await response.json();
+    
     if (response.status !== 200) return "";
-
+	const body = await response.json();
     return body;
   } 
   
   
   getProfessors = async() => {
     const response = await fetch('/api/getProfessors');
-    const body = await response.json();
+    
     if (response.status !== 200) return "";
-
+	const body = await response.json();
     return body;
   } 
 

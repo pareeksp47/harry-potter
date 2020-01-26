@@ -29,30 +29,23 @@ class Header extends Component {
  this.handleAddProfessorSubmit = this.handleAddProfessorSubmit.bind(this);
     }
 
-    componentDidMount() {
-        this.getResponse()
-            .then(res => {
-                console.log(res)
-            })
-    }
-
     handleChangeLastName(event) {
         this.setState({
             lastName: event.target.value
         });
-        console.log("lastname", this.state.lastName);
+        
     }
 
     handleChangeFirstName(event) {
         this.setState({
             firstName: event.target.value
         });
-        console.log("firstname", this.state.firstName);
+        
     }
 
     handleClickOpen = () => {
         this.setState({ open: true });
-        console.log("open");
+        
     };
 
     handleClickClose = () => {
@@ -72,7 +65,7 @@ class Header extends Component {
 			
 			const response = await fetch('/api/createProfessor/' + this.state.firstName + '/' + this.state.lastName + '/'+this.state.gender,{method:'POST'});
 			const body = await response.json();
-			console.log("body");
+			
 			if (response.status !== 200) throw Error(body.message);
 
 			return body;
@@ -81,7 +74,7 @@ class Header extends Component {
     }
 
     handleAddProfessorSubmit = () => {
-        console.log('entry');
+        
         this.getResponse();
     }
 
