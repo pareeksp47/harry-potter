@@ -36,7 +36,7 @@ describe('get student', () => {
             .expect('Content-Type', /json/)
             .expect(response => {
                 expect(response.body).toEqual(expectedResponseBody)
-                expect(getStidentsFn).toHaveBeenCalledTimes(1)
+                expect(getAllStudentsFn).toHaveBeenCalledTimes(1)
             })
             .end(done)
     })

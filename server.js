@@ -1,5 +1,6 @@
-
+import 'regenerator-runtime/runtime'
 import { getClinic } from './apiClinic'
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
