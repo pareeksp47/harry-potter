@@ -26,20 +26,6 @@ class House extends Component {
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClickClose = this.handleClickClose.bind(this);
         this.handleProfessors = this.handleProfessors.bind(this);
-        this.professors = [
-            {
-                value: 'John',
-                label: 'Johnn Florian'
-            },
-            {
-                value: 'ALex',
-                label: 'Alexxxx'
-            },
-            {
-                value: 'Eric',
-                label: 'Eric'
-            }
-        ];
     }
 	
 	 handleChangePoints(event) {
@@ -76,6 +62,7 @@ class House extends Component {
 			if (response.status == 200) this.props.points[this.props.id] = this.props.points[this.props.id] ? (this.props.points[this.props.id] + parseInt(this.state.addPoint, 10 )) : this.state.addPoint;
 			
 			this.state.addPoint ='';
+			this.state.professor = 'Select your professor';
 		}
 		
 	} 
