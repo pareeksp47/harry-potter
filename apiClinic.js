@@ -1,6 +1,7 @@
 
 import students from './students'
 import points from './points'
+import professors from './professors'
 import TypeOrmDal from './typeOrmDal'
 
 
