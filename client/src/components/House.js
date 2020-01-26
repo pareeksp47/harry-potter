@@ -55,15 +55,16 @@ class House extends Component {
     };
 	
 	addPoints = async() => {
-		console.log(this.state.addPoint + " "+this.state.professor+" "+this.props.id);
+		
 		if(this.state.addPoint && this.state.professor != 'Select your professor' && this.props.id){
 			
 			const response = await fetch('/api/points/'+this.state.addPoint+'/'+this.state.professor+'/'+this.props.id,{method:'POST'});
 			
 			if (response.status == 200) this.props.points[this.props.id] = this.props.points[this.props.id] ? (parseInt(this.props.points[this.props.id]) + parseInt(this.state.addPoint )) : parseInt(this.state.addPoint);
 			
-			this.state.addPoint ='';
-			this.state.professor = 'Select your professor';
+			this.setState({ addpoint: '' });
+			this.setState({ professor: 'Select your professor' });
+			
 		}
 		
 	} 
