@@ -35,5 +35,4 @@ describe('get house', () => {
             })
             .end(done)
     })
-
 })
