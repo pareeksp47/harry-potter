@@ -57,15 +57,17 @@ class App extends Component {
 		  if(res.points){
 			  
 			  res.points.map((point, i) => {     
-           
-				if(point){
-					calPoints[point.id_house] = calPoints[point.id_house] ? (calPoints[point.id_house] + point.nb_points) : point.nb_points
-				}
+				
+				//if(point){
+					console.log(point.nb_points);
+					calPoints[point.id_house] = calPoints[point.id_house] ? (parseInt(calPoints[point.id_house]) + parseInt(point.nb_points)) : parseInt(point.nb_points)
+					
+				//}
 			  })
 		  }
 		  
-        const points = calPoints;
-        this.setState({ points: points });
+        const newpoints = calPoints;
+        this.setState({ points: newpoints });
       })
   }
 

@@ -60,7 +60,7 @@ class House extends Component {
 			
 			const response = await fetch('/api/points/'+this.state.addPoint+'/'+this.state.professor+'/'+this.props.id,{method:'POST'});
 			
-			if (response.status == 200) this.props.points[this.props.id] = this.props.points[this.props.id] ? (this.props.points[this.props.id] + parseInt(this.state.addPoint, 10 )) : this.state.addPoint;
+			if (response.status == 200) this.props.points[this.props.id] = this.props.points[this.props.id] ? (parseInt(this.props.points[this.props.id]) + parseInt(this.state.addPoint )) : parseInt(this.state.addPoint);
 			
 			this.state.addPoint ='';
 			this.state.professor = 'Select your professor';
