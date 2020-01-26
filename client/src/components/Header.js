@@ -167,7 +167,7 @@ class Header extends Component {
                     </DialogActions>
                 </Dialog>
                 <Dialog open={this.state.openStud} onClose={this.handleClickCloseStud} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title"> Create Studen</DialogTitle>
+                    <DialogTitle id="form-dialog-title"> Create Student</DialogTitle>
                     <DialogContent>
                         <FormControl fullWidth className="marginInputField">
                             <InputLabel htmlFor="component-simple">First Name</InputLabel>
