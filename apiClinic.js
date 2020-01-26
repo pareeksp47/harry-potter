@@ -14,7 +14,7 @@ class ApiClinic {
     async getAllStudents() {
 		
 		try{
-
+			
 			const dal = new TypeOrmDal()
 			
 			
