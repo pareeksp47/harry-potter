@@ -66,15 +66,6 @@ class Gryffindor extends Component {
     };
 
     render() {
-        let bgImgGryffindor = {
-            backgroundImage: `url(${gryffindor})`,
-            backgroundAttachment: 'fixed',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'red',
-        }
         return (
             <>
                 <Grid item xs={6}>
