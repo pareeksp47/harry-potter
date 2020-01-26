@@ -1,5 +1,4 @@
 import 'regenerator-runtime/runtime'
-
 import { getClinic } from './apiClinic'
 
 const express = require('express');
@@ -81,8 +80,6 @@ app.get('/api/getProfessors', async (req, res) => {
     const createdElements = await getClinic().getAllProfessors()
     res.status(200).set({ 'Content-Type': 'application/json' }).json(createdElements)
 })
-
-
 
 const port = process.env.PORT || 5000;
 
