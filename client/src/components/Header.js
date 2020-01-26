@@ -122,6 +122,7 @@ class Header extends Component {
     handleAddProfessorSubmit = () => {
         this.getResponse();
         this.handleClickClose();
+		window.location.reload();
     }
     handleAddStudentSubmit = () => {
         this.getStudResponse();
