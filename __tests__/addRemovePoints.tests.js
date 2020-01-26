@@ -12,9 +12,9 @@ beforeEach(() => {
 describe('add or remove points', () => {
     it('With correct data', (done) => {
 
-        const nbpoints = 10
-        const idprofessor = 2
-        const idhouse = 3
+        const nbpoints = "10"
+        const idprofessor = "2"
+        const idhouse = "3"
 
 
         const addRemovePointsFn = jest.fn().mockResolvedValue(200);
@@ -24,11 +24,11 @@ describe('add or remove points', () => {
         })
 
         request(app)
-            .post(`api/points/${nbpoints}/${idprofessor}/${idhouse}`)
+            .post(`/api/points/${nbpoints}/${idprofessor}/${idhouse}`)
             .expect(200)
             .expect(response => {
-                expect(addRemovePoints).toHaveBeenCalledTimes(1)
-                expect(addRemovePoints).toHaveBeenCalledWith(nbpoints, idprofessor, idhouse)
+                expect(addRemovePointsFn).toHaveBeenCalledTimes(1)
+                expect(addRemovePointsFn).toHaveBeenCalledWith(nbpoints, idprofessor, idhouse)
             })
             .end(done)
     })

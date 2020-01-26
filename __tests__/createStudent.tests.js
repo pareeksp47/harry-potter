@@ -34,11 +34,11 @@ describe('create student', () => {
         })
 
         request(app)
-            .post(`api/createStudent/${firstname}/${lastname}/${gender}/${id_house}`)
+            .post(`/api/createStudent/${firstname}/${lastname}/${gender}/${id_house}`)
             .expect(200)
             .expect(response => {
-                expect(createStudent).toHaveBeenCalledTimes(1)
-                expect(createStudent).toHaveBeenCalledWith(firstname, lastname, gender, id_house)
+                expect(createStudentFn).toHaveBeenCalledTimes(1)
+                expect(createStudentFn).toHaveBeenCalledWith(firstname, lastname, gender, id_house)
             })
             .end(done)
     })
