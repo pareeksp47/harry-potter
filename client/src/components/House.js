@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { red } from '@material-ui/core/colors';
 import './Header.css';
 import { Typography, Grid, Card, CardMedia, CardContent, CardActions, Fab, Dialog, DialogTitle,
-    DialogContent, DialogContentText, DialogActions, FormControl, InputLabel,
-    FormLabel, RadioGroup, FormControlLabel, Radio, Input, Button, TextField, MenuItem } from '@material-ui/core';
+    DialogContent, DialogActions, FormControl, InputLabel, Input, Button, TextField, MenuItem } from '@material-ui/core';
 
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -56,11 +54,11 @@ class House extends Component {
 	
 	addPoints = async() => {
 		
-		if(this.state.addPoint && this.state.professor != 'Select your professor' && this.props.id){
+		if(this.state.addPoint && this.state.professor !== 'Select your professor' && this.props.id){
 			
 			const response = await fetch('/api/points/'+this.state.addPoint+'/'+this.state.professor+'/'+this.props.id,{method:'POST'});
 			
-			if (response.status == 200) this.props.points[this.props.id] = this.props.points[this.props.id] ? (parseInt(this.props.points[this.props.id]) + parseInt(this.state.addPoint )) : parseInt(this.state.addPoint);
+			if (response.status === 200) this.props.points[this.props.id] = this.props.points[this.props.id] ? (parseInt(this.props.points[this.props.id]) + parseInt(this.state.addPoint )) : parseInt(this.state.addPoint);
 			
 			this.setState({ addpoint: '' });
 			this.setState({ professor: 'Select your professor' });

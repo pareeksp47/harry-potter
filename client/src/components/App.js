@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Box, makeStyles, Container, Grid,Typography } from '@material-ui/core';
+import { Box, Container, Grid } from '@material-ui/core';
 import Header from './Header';
 import House from './House';
 
@@ -56,7 +56,7 @@ class App extends Component {
 		  let calPoints = {};
 		  if(res.points){
 			  
-			  res.points.map((point, i) => {     
+			  res.points.forEach(function(point) {     
 				
 				//if(point){
 					
