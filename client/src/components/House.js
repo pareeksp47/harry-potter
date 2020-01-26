@@ -16,13 +16,13 @@ class House extends Component {
 	  this.state = {
 			imageName: '',
 			houseName: '',
-            lastName: '',
+			addpoint : '',
             open: false,
             professor: 'Select your professor'
 	  }
 	  
 	  this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
-        this.handleChangeLastName = this.handleChangeLastName.bind(this);
+        this.handleChangePoints = this.handleChangePoints.bind(this);
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClickClose = this.handleClickClose.bind(this);
         this.handleProfessors = this.handleProfessors.bind(this);
@@ -42,9 +42,12 @@ class House extends Component {
         ];
     }
 	
-	 handleChangeLastName(event) {
+	 handleChangePoints(event) {
         this.setState({
-            lastName: event.target.value
+            newPoint: event.target.value
+        });
+		 this.setState({
+            addPoint: event.target.value
         });
     }
 	
@@ -63,9 +66,23 @@ class House extends Component {
     handleClickOpen = () => {
         this.setState({ open: true });
     };
+	
+	addPoints = async() => {
+		console.log(this.state.addPoint + " "+this.state.professor+" "+this.props.id);
+		if(this.state.addPoint && this.state.professor != 'Select your professor' && this.props.id){
+			
+			const response = await fetch('/api/points/'+this.state.addPoint+'/'+this.state.professor+'/'+this.props.id,{method:'POST'});
+			
+			if (response.status == 200) this.props.points[this.props.id] = this.props.points[this.props.id] ? (this.props.points[this.props.id] + parseInt(this.state.addPoint, 10 )) : this.state.addPoint;
+		}
+		
+	} 
 
-    handleClickClose = () => {
-        this.setState({ open: false });
+    handleClickClose = async () => {
+        
+		
+		await this.addPoints();
+		this.setState({ open: false });
     };
 
 	  
@@ -100,7 +117,8 @@ class House extends Component {
                             <DialogContent>
                             <FormControl className="marginInputField" fullWidth> 
                                     <InputLabel htmlFor="component-simple">Points</InputLabel>
-                                    <Input id="lastname" type="number" value={this.state.lastName} onChange={this.handleChangeLastName} />
+                                    <Input id="newpoint" type="number" value={this.state.newpoint} onChange={this.handleChangePoints} />
+									
                                 </FormControl>
                                 <TextField
                                     id="standard-select-currency"
@@ -110,11 +128,14 @@ class House extends Component {
                                     value={this.state.professor}
                                     onChange={this.handleProfessors}
                                 >
-                                    {this.professors.map(option => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
+									<MenuItem key="-1" value={this.state.professor}>
+                                            {}
                                         </MenuItem>
-                                    ))}
+                                    {this.props.professors ? this.props.professors.map(option => (
+                                        <MenuItem key={option.id} value={option.id}>
+                                            {option.firstname} {option.lastname}
+                                        </MenuItem>
+                                    )) : "" }
                                 </TextField>
                                 
                             </DialogContent>

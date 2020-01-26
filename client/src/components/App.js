@@ -8,7 +8,8 @@ import House from './House';
 class App extends Component {
   state = {
     houses: '',
-	points: ''
+	points: '',
+	professors : ''
   }
 
   getHouses = async() => {
@@ -26,12 +27,27 @@ class App extends Component {
 
     return body;
   } 
+  
+  
+  getProfessors = async() => {
+    const response = await fetch('/api/getProfessors');
+    const body = await response.json();
+    if (response.status !== 200) return "";
+
+    return body;
+  } 
 
   componentDidMount() {
     this.getHouses()
       .then(res => {
         const houses = res.houses;
         this.setState({ houses: houses });
+      })
+	  
+	  this.getProfessors()
+      .then(res => {
+        const professors = res.professors;
+        this.setState({ professors: professors });
       })
 	  
 	this.getPoints()
@@ -56,6 +72,7 @@ class App extends Component {
   render() {
     const { houses } = this.state;
 	const { points } = this.state;
+	const { professors } = this.state;
 
     return (
       <Container maxWidth='lg' >
@@ -64,7 +81,7 @@ class App extends Component {
       </Box>
       <Box m={3} p={2}>
         <Grid container spacing={4} p={2}>
-		  {houses ? houses.map(item => <House key={item.id} name={item.name} points={points} id={item.id} />) : ""} 
+		  {houses ? houses.map(item => <House key={item.id} name={item.name} professors={professors} points={points} id={item.id} />) : ""} 
         
         </Grid>
       </Box>
