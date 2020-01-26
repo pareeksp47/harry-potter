@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime'
 
-import app from './app'
+import app from './server'
 
 const port = process.env.PORT || 5000;
 
