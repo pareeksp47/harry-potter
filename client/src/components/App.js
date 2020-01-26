@@ -59,7 +59,7 @@ class App extends Component {
 			  res.points.map((point, i) => {     
 				
 				//if(point){
-					console.log(point.nb_points);
+					
 					calPoints[point.id_house] = calPoints[point.id_house] ? (parseInt(calPoints[point.id_house]) + parseInt(point.nb_points)) : parseInt(point.nb_points)
 					
 				//}
