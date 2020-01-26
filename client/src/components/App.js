@@ -79,7 +79,7 @@ class App extends Component {
     return (
       <Container maxWidth='lg' >
       <Box>
-        <Header />
+        <Header  houses={houses}/>
       </Box>
       <Box m={3} p={2}>
         <Grid container spacing={4} p={2}>
