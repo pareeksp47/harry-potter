@@ -15,13 +15,14 @@ describe('get student', () => {
         const firstname = 'Harry'
         const lastname = ' Potter'
         const gender = 'M'
+        const id_house = 1
 
         const expectedResponseBody = [{
             id: 1,
             fisrtname: firstname,
             lastname: lastname,
             gender: gender,
-            id_house: 1
+            id_house: id_house
         }];
 
         const getAllStudentsFn = jest.fn().mockResolvedValue(expectedResponseBody);

@@ -5,33 +5,37 @@ import * as apiClinicDependency from '../apiClinic'
 
 beforeEach(() => {
     apiClinicDependency.getClinic = jest.fn().mockReturnValue({
-        getAllHouses: jest.fn()
+        getAllPoints: jest.fn()
     })
 })
 
-describe('get house', () => {
+describe('get points', () => {
     it('With correct data', (done) => {
 
-        const name = 'Gryffindor'
+        const nb_points = 10
+        const id_professor = 227
+        const id_house = 2
 
         const expectedResponseBody = [{
             id: 1,
-            name: name
+            nb_points: nb_points,
+            id_professor: id_professor,
+            id_house: id_house
         }];
 
-        const getAllHousesFn = jest.fn().mockResolvedValue(expectedResponseBody);
+        const getAllPointsFn = jest.fn().mockResolvedValue(expectedResponseBody);
 
         apiClinicDependency.getClinic.mockReturnValue({
-            getAllHouses: getAllHousesFn
+            getAllPoints: getAllPointsFn
         })
 
         request(app)
-            .get(`/api/getHouses`)
+            .get(`/api/getPoints`)
             .expect(200)
             .expect('Content-Type', /json/)
             .expect(response => {
                 expect(response.body).toEqual(expectedResponseBody)
-                expect(getAllHousesFn).toHaveBeenCalledTimes(1)
+                expect(getAllPointsFn).toHaveBeenCalledTimes(1)
             })
             .end(done)
     })
